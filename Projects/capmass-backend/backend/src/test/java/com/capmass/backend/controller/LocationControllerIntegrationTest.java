@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -303,17 +304,5 @@ class LocationControllerIntegrationTest {
             .andExpect(jsonPath("$[0].name", instanceOf(String.class)))
             .andExpect(jsonPath("$[0].latitude", instanceOf(Number.class)))
             .andExpect(jsonPath("$[0].longitude", instanceOf(Number.class)));
-    }
-
-    private void assertEquals(String expected, String actual) {
-        if (!expected.equals(actual)) {
-            throw new AssertionError("Expected: " + expected + " but was: " + actual);
-        }
-    }
-
-    private void assertNotEquals(String unexpected, String actual) {
-        if (unexpected.equals(actual)) {
-            throw new AssertionError("Values should not be equal: " + actual);
-        }
     }
 }
