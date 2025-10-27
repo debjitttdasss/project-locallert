@@ -4,18 +4,24 @@ import com.capmass.backend.entity.Location;
 import com.capmass.backend.entity.LocationCategory;
 import com.capmass.backend.repository.LocationCategoryRepository;
 import com.capmass.backend.repository.LocationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    @Autowired
-    private LocationCategoryRepository categoryRepository;
+    private static final Logger logger = LoggerFactory.getLogger(DataLoader.class);
 
-    @Autowired
-    private LocationRepository locationRepository;
+    private final LocationCategoryRepository categoryRepository;
+    private final LocationRepository locationRepository;
+
+    public DataLoader(LocationCategoryRepository categoryRepository, 
+                     LocationRepository locationRepository) {
+        this.categoryRepository = categoryRepository;
+        this.locationRepository = locationRepository;
+    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -64,6 +70,6 @@ public class DataLoader implements CommandLineRunner {
         locationRepository.save(new Location(null, "South Tower", 
             "Upper-class student housing", residence, 40.7124, -74.0064));
 
-        System.out.println("Sample data loaded successfully!");
+        logger.info("Sample data loaded successfully!");
     }
 }
