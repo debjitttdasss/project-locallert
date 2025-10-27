@@ -1,0 +1,9 @@
+package com.campus.backend.repository;
+
+import com.campus.backend.model.Article;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ArticleRepository extends JpaRepository<Article, Long> {
+}
